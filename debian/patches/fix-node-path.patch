@@ -1,0 +1,22 @@
+Description: fix node path
+Author: Xavier Guimard <yadd@debian.org>
+Forwarded: not-needed
+Last-Update: 2019-01-07
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+--- a/bin/cake
++++ b/bin/cake
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env node
++#!/usr/bin/node
+ 
+ try {
+   new Function('var {a} = {a: 1}')();
+--- a/bin/coffee
++++ b/bin/coffee
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env node
++#!/usr/bin/node
+ 
+ try {
+   new Function('var {a} = {a: 1}')();

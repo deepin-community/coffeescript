@@ -1,0 +1,6 @@
+bin/cake test
+
+# Removed: needs node-puppeteer with a lot of dependencies
+#if test "$AUTOPKGTEST_TMP" = "" ; then
+#	bin/cake test:browser
+#fi

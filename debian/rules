@@ -1,4 +1,25 @@
 #!/usr/bin/make -f
 
+include /usr/share/dpkg/pkg-info.mk
+
 %:
 	dh $@
+
+override_dh_auto_build:
+	cp /usr/share/nodejs/coffeescript/lib/coffeescript/parser.js lib/coffeescript/
+	mkdir -p docs/v1/browser-compiler
+	chmod +x bin/cake
+	bin/cake build
+	MINIFY=false bin/cake build:browser
+	uglifyjs -o debian/coffee-script.min.js docs/v2/browser-compiler-modern/coffeescript.js
+	rm -f docs/v1/browser-compiler/coffee-script.js
+	MINIFY=false bin/cake build:browser
+	uglifyjs -o tmp.min.js docs/v2/browser-compiler-modern/coffeescript.js
+	mv tmp.min.js docs/v1/browser-compiler/coffee-script.js
+	# generate manpage based on --help option of script itself
+	HOME=/tmp help2man \
+		--name="interpreter and compiler for the CoffeeScript language" \
+		--version-string="$(DEB_VERSION_UPSTREAM)" \
+		--no-info \
+		--output=debian/coffee.1 \
+		bin/coffee
