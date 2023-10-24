@@ -1,0 +1,9 @@
+debian/*.1
+debian/coffee-script.min.js
+docs/v1/browser-compiler/
+docs/v2/browser-compiler-legacy/coffeescript.js
+docs/v2/browser-compiler-modern/coffeescript.js
+lib/coffeescript-browser-compiler-legacy/coffeescript.js
+lib/coffeescript-browser-compiler-modern/coffeescript.js
+lib/coffeescript/parser.js
+tmp.min.js

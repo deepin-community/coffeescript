@@ -1,0 +1,24 @@
+Description: Make the build reproducible
+Author: Chris Lamb <lamby@debian.org>
+Forwarded: no
+Last-Update: 2022-06-06
+
+--- a/Cakefile
++++ b/Cakefile
+@@ -16,12 +16,15 @@
+   reset  = '\x1B[0m'
+ 
+ # Built file header.
++now = new Date()
++if process.env.SOURCE_DATE_EPOCH
++  now = new Date((process.env.SOURCE_DATE_EPOCH * 1000) + (now.getTimezoneOffset() * 60000))
+ header = """
+   /**
+    * CoffeeScript Compiler v#{CoffeeScript.VERSION}
+    * https://coffeescript.org
+    *
+-   * Copyright 2011-#{new Date().getFullYear()}, Jeremy Ashkenas
++   * Copyright 2011-#{now.getFullYear()}, Jeremy Ashkenas
+    * Released under the MIT License
+    */
+ """
